@@ -6,24 +6,24 @@ users to book a travel package and display available packages.*/
 #include <string.h>
 #define MAX_PACKAGE 100
 struct  package{
-    char name[30];
-    char destination[30];
+    char name[20];
+    char destination[20];
     int duration;
     float cost;
     float seatsAvailable;
 };
-// Functions declaration
+//Functions declaration
 void bookPackage(struct package packages[], int *packageCount);
 void displayPackage(struct package packages[], int carCount);
 
-int main() {
+int main(){
     struct package packages[MAX_PACKAGE];
     int packageCount = 0;          
     int choice;
 
     while (1)
     {
-        // Display menu
+        //Menu
         printf("\n****Travel packages Menu****\n");
         printf("1. Book a travel package\n");
         printf("2. Display Available packages\n");
@@ -47,48 +47,43 @@ int main() {
     return 0;
 }
 
-// Function to book a travel package
-void bookPackage(struct package packages[], int *packageCount) {
-    if (*packageCount >= MAX_PACKAGE) {
-        printf("Cannot add more packages. Maximum limit reached!\n");
+//Function to book a travel package
+void bookPackage(struct package packages[], int *packageCount){
+    if (*packageCount >= MAX_PACKAGE) 
+    {
+        printf("Cannot add more packages, limit breachedddd\n");
         return;
     }
-
     struct package newPackage;
 
     printf("\nEnter package name: ");
-    getchar(); // Clear input buffer
+    getchar(); //To Clear input buffer
     fgets(newPackage.name, sizeof(newPackage.name), stdin);
-    newPackage.name[strcspn(newPackage.name, "\n")] = '\0'; // Remove trailing newline
-
+    newPackage.name[strcspn(newPackage.name, "\n")] = '\0'; //Removes newline
     printf("Enter destination: ");
     fgets(newPackage.destination, sizeof(newPackage.destination), stdin);
-    newPackage.destination[strcspn(newPackage.destination, "\n")] = '\0'; // Remove trailing newline
-
+    newPackage.destination[strcspn(newPackage.destination, "\n")] = '\0'; // Removes newline
     printf("Enter duration (in days): ");
     scanf("%d", &newPackage.duration);
-
-    printf("Enter cost (in USD): ");
+    printf("Enter cost (in dollars): ");
     scanf("%f", &newPackage.cost);
-
     printf("Enter number of seats available: ");
     scanf("%f", &newPackage.seatsAvailable);
-
-    packages[*packageCount] = newPackage; // Add the new package to the array
-    (*packageCount)++; // Increment package count
-
+    packages[*packageCount] = newPackage; //Add new package.
+    (*packageCount)++; //Incrementing pacckage count
     printf("\nPackage successfully added!\n");
-}
+}//End bookPackage
 
-// Function to display all available travel packages
-void displayPackage(struct package packages[], int packageCount) {
-    if (packageCount == 0) {
+//Function to display all available travel packages
+void displayPackage(struct package packages[], int packageCount){
+    if (packageCount == 0)
+    {
         printf("\nNo travel packages available.\n");
         return;
     }
-
     printf("\n**** Available Travel Packages ****\n");
-    for (int i = 0; i < packageCount; i++) {
+    for (int i = 0; i < packageCount; i++) 
+    {
         printf("\nPackage %d:\n", i + 1);
         printf("Name: %s\n", packages[i].name);
         printf("Destination: %s\n", packages[i].destination);
@@ -96,6 +91,6 @@ void displayPackage(struct package packages[], int packageCount) {
         printf("Cost: $%.2f\n", packages[i].cost);
         printf("Seats Available: %.0f\n", packages[i].seatsAvailable);
     }
-}
+} //End displayPackage
 
       
